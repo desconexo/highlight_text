@@ -17,7 +17,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  highlight:
+  highlight_text:
     path: ../
 
 # For information on the generic Dart part of this file, see the

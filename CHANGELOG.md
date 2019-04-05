@@ -1,3 +1,6 @@
+## 0.0.1+2
+Minor maintenance fixes
+
 ## 0.0.1+1
 Example correction
 
