@@ -1,6 +1,6 @@
 name: highlight_text
 description: A flutter plugin to highlight words from a text
-version: 0.0.1
+version: 0.0.1+1
 author: Fernando Éricles <fernandoericles98@gmail.com>
 homepage: https://github.com/desconexo/highlight
 

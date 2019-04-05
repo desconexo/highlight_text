@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:highlight/highlight_text.dart';
+import 'package:highlight_text/highlight_text.dart';
 
 void main() {
   runApp(

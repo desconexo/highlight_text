@@ -4,7 +4,7 @@ A flutter plugin to highlight words from a text.
 
 ## Usage
 
-To use this plugin, add `highlight` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
+To use this plugin, add `highlight_text` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
 
 ## Getting Started
 
@@ -14,7 +14,7 @@ With this plugin you can highlight words and create specific actions for each hi
 
 Import the highlight library
 ``` dart
-import 'package:highlight/highlight.dart';
+import 'package:highlight_text/highlight_text.dart';
 ```
 
 You should use the `HighlightedWord` class to specify the dictionary words in a Map object
