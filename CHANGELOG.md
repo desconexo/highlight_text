@@ -1,3 +1,6 @@
+## 0.3.0
+Now the highlights work in words followed by special characters, numbers or complementary words.
+
 ## 0.2.0
 The meaning attribute was removed from the HighlightedWord class; the onTap is working normally.
 
