@@ -27,20 +27,69 @@ class _HomePageState extends State<HomePage> {
     );
     Map<String, HighlightedWord> words = {
       "Flutter": HighlightedWord(
-        meaning:
-            "Flutter's engine, written primarily in C++, provides low-level rendering support using Google's Skia graphics library.",
-        onTap: (context) {},
+        onTap: () {
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text("Flutter"),
+                  content: Text(
+                      "Flutter's engine, written primarily in C++, provides low-level rendering support using Google's Skia graphics library."),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text("Ok"),
+                    )
+                  ],
+                );
+              });
+        },
         textStyle: textStyle,
       ),
       "open-source": HighlightedWord(
-        meaning:
-            "Open-source software (OSS) is a type of computer software in which source code is released under a license in which the copyright holder grants users the rights to study, change, and distribute the software to anyone and for any purpose.",
-        onTap: (context) {},
+        onTap: () {
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text("open-source"),
+                  content: Text(
+                      "Open-source software (OSS) is a type of computer software in which source code is released under a license in which the copyright holder grants users the rights to study, change, and distribute the software to anyone and for any purpose."),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text("Ok"),
+                    )
+                  ],
+                );
+              });
+        },
         textStyle: textStyle,
       ),
       "Android": HighlightedWord(
-        meaning: "Android is a mobile operating system developed by Google.",
-        onTap: (context) {},
+        onTap: () {
+          showDialog(
+              context: context,
+              builder: (contextb) {
+                return AlertDialog(
+                  title: Text("Android"),
+                  content: Text(
+                      "Android is a mobile operating system developed by Google."),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.of(contextb).pop();
+                      },
+                      child: Text("Ok"),
+                    )
+                  ],
+                );
+              });
+        },
         textStyle: textStyle,
       ),
     };

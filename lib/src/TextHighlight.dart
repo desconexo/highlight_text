@@ -75,7 +75,7 @@ class _TextHighlightState extends State<TextHighlight> {
             ],
             style: widget.words[p].textStyle,
             recognizer: TapGestureRecognizer()
-              ..onTap = () => widget.words[p].onTap,
+              ..onTap = () => widget.words[p].onTap(),
           );
         } else {
           return TextSpan(

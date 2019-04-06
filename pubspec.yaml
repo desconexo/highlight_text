@@ -1,6 +1,6 @@
 name: highlight_text
-description: With this plugin you can highlight words and create specific styles and actions.
-version: 0.0.1+2
+description: With this package you can highlight words and create specific styles and actions.
+version: 0.2.0
 author: Fernando Éricles <fernandoericles98@gmail.com>
 homepage: https://github.com/desconexo/highlight_text
 
