@@ -92,6 +92,72 @@ class _HomePageState extends State<HomePage> {
         },
         textStyle: textStyle,
       ),
+      "iOS": HighlightedWord(
+        onTap: () {
+          showDialog(
+              context: context,
+              builder: (contextb) {
+                return AlertDialog(
+                  title: Text("iOS"),
+                  content: Text(
+                      "iOS is a mobile operating system created and developed by Apple Inc. exclusively for its hardware."),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.of(contextb).pop();
+                      },
+                      child: Text("Ok"),
+                    )
+                  ],
+                );
+              });
+        },
+        textStyle: textStyle,
+      ),
+      "Fuchsia": HighlightedWord(
+        onTap: () {
+          showDialog(
+              context: context,
+              builder: (contextb) {
+                return AlertDialog(
+                  title: Text("Fuchsia"),
+                  content: Text(
+                      "Fuchsia is a capability-based operating system currently being developed by Google."),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.of(contextb).pop();
+                      },
+                      child: Text("Ok"),
+                    )
+                  ],
+                );
+              });
+        },
+        textStyle: textStyle,
+      ),
+      "Google": HighlightedWord(
+        onTap: () {
+          showDialog(
+              context: context,
+              builder: (contextb) {
+                return AlertDialog(
+                  title: Text("Google"),
+                  content: Text(
+                      "Google LLC is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, search engine, cloud computing, software, and hardware. It is considered one of the Big Four technology companies, alongside Amazon, Apple and Facebook."),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        Navigator.of(contextb).pop();
+                      },
+                      child: Text("Ok"),
+                    )
+                  ],
+                );
+              });
+        },
+        textStyle: textStyle,
+      ),
     };
     return Scaffold(
       appBar: AppBar(
