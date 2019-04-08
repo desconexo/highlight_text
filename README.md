@@ -41,7 +41,7 @@ Map<String, HighlightedWord> words = {
 };
 ```
 
-Now you can call the widget `TextHighlight`
+Now you can call the `TextHighlight` widget
 ``` dart
 TextHighlight(
     text: text, // You need to pass the string you want the highlights
