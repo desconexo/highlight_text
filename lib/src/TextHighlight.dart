@@ -74,7 +74,8 @@ class _TextHighlightState extends State<TextHighlight> {
       bool lastRemoved = false;
       if (widget.words.containsKey(p) ||
           widget.words.containsKey(wordLastRemoved)) {
-        if (widget.words.containsKey(wordLastRemoved) && wordLastRemoved.length + 1 == p.length) lastRemoved = true;
+        if (widget.words.containsKey(wordLastRemoved) &&
+            wordLastRemoved.length + 1 == p.length) lastRemoved = true;
         return TextSpan(
           text: !lastRemoved ? p + " " : wordLastRemoved,
           children: <TextSpan>[
@@ -136,7 +137,8 @@ class _TextHighlightState extends State<TextHighlight> {
     bool lastRemoved = false;
     if (widget.words.containsValue(word) ||
         widget.words.containsKey(wordLastRemoved)) {
-      if (widget.words.containsKey(wordLastRemoved) && wordLastRemoved.length +1 == word.length) lastRemoved = true;
+      if (widget.words.containsKey(wordLastRemoved) &&
+          wordLastRemoved.length + 1 == word.length) lastRemoved = true;
       return TextSpan(
         text: !lastRemoved ? word + " " : wordLastRemoved,
         style: widget.words[!lastRemoved ? word : wordLastRemoved].textStyle,
