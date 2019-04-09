@@ -74,14 +74,30 @@ class _TextHighlightState extends State<TextHighlight> {
       bool lastRemoved = false;
       if (widget.words.containsKey(p) ||
           widget.words.containsKey(wordLastRemoved)) {
-        if (widget.words.containsKey(wordLastRemoved)) lastRemoved = true;
+        if (widget.words.containsKey(wordLastRemoved) && wordLastRemoved.length + 1 == p.length) lastRemoved = true;
         return TextSpan(
-          text:
-              !lastRemoved ? p + " " : wordLastRemoved + charLastRemoved + " ",
+          text: !lastRemoved ? p + " " : wordLastRemoved,
           children: <TextSpan>[
-            words.length > 0
-                ? _setTextSpan(nextWord, words)
-                : words.length > 0 ? TextSpan(text: p + " ",) : _singleHighlight(nextWord),
+            lastRemoved
+                ? TextSpan(
+                    text: charLastRemoved + " ",
+                    style: widget.textStyle,
+                    children: <TextSpan>[
+                      words.length > 0
+                          ? _setTextSpan(nextWord, words)
+                          : TextSpan(
+                              text: words.length >= 0 ? p + " " : nextWord,
+                              style: widget.textStyle,
+                            ),
+                    ],
+                  )
+                : words.length > 0
+                    ? _setTextSpan(nextWord, words)
+                    : words.length > 0
+                        ? TextSpan(
+                            text: p + " ",
+                          )
+                        : _singleHighlight(nextWord),
           ],
           style: widget.words[!lastRemoved ? p : wordLastRemoved].textStyle,
           recognizer: TapGestureRecognizer()
@@ -120,12 +136,21 @@ class _TextHighlightState extends State<TextHighlight> {
     bool lastRemoved = false;
     if (widget.words.containsValue(word) ||
         widget.words.containsKey(wordLastRemoved)) {
-      if (widget.words.containsKey(wordLastRemoved)) lastRemoved = true;
+      if (widget.words.containsKey(wordLastRemoved) && wordLastRemoved.length +1 == word.length) lastRemoved = true;
       return TextSpan(
-        text: !lastRemoved ? word + " " : wordLastRemoved + charLastRemoved + " ",
+        text: !lastRemoved ? word + " " : wordLastRemoved,
         style: widget.words[!lastRemoved ? word : wordLastRemoved].textStyle,
+        children: <TextSpan>[
+          lastRemoved
+              ? TextSpan(
+                  text: charLastRemoved,
+                  style: widget.textStyle,
+                )
+              : TextSpan(),
+        ],
         recognizer: TapGestureRecognizer()
-          ..onTap = () => widget.words[!lastRemoved ? word : wordLastRemoved].onTap(),
+          ..onTap =
+              () => widget.words[!lastRemoved ? word : wordLastRemoved].onTap(),
       );
     } else {
       return TextSpan(
