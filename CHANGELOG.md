@@ -1,3 +1,6 @@
+## 0.4.0
+If the highlighted word has special characters then it is only highlighted if it has only one character.
+
 ## 0.3.0
 Now the highlights work in words followed by special characters, numbers or complementary words.
 
