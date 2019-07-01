@@ -53,3 +53,20 @@ TextHighlight(
     textAlign: TextAlign.justify, // You can use any attribute of the RichText widget
 ),
 ```
+
+## 0.7.0 Update
+Now you can choose to differentiate words with upper and lower case.
+To differentiate words by uppercase or lowercase letters just use as in the previous examples. To not differentiate words (text == TeXt) use the new HighlightMap class by passing its word library as a parameter.
+
+``` dart
+HighlightMap highlightMap = HighlightMap(words);
+```
+
+And then you pass the `highlightMap.getMap` as the `words` parameter in the `TextHighlight` widget
+
+``` dart
+TextHighlight(
+    text: text,
+    words: highlightMap.getMap,
+),
+```

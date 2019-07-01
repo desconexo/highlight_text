@@ -1,3 +1,9 @@
+## 0.7.1
+Some corrections in the example.
+
+## 0.7.0
+Now you can choose to differentiate words with upper and lower case.
+
 ## 0.6.0
 Fixed the problem of the last word is not always highlighted.
 

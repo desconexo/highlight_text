@@ -1,10 +1,11 @@
+import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:highlight_text/src/HighlightedWord.dart';
 
 class TextHighlight extends StatelessWidget {
   final String text;
-  final Map<String, HighlightedWord> words;
+  final LinkedHashMap<String, HighlightedWord> words;
   final TextStyle textStyle;
   final TextAlign textAlign;
   final TextDirection textDirection;

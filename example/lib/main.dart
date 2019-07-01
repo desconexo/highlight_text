@@ -26,11 +26,7 @@ class _HomePageState extends State<HomePage> {
       fontSize: 26.0,
     );
     Map<String, HighlightedWord> words = {
-      "DDDD": HighlightedWord(
-        onTap: () {},
-        textStyle: textStyle
-      ),
-      "Flutter": HighlightedWord(
+      "flutter": HighlightedWord(
         onTap: () {
           showDialog(
               context: context,
@@ -52,7 +48,7 @@ class _HomePageState extends State<HomePage> {
         },
         textStyle: textStyle,
       ),
-      "open-source": HighlightedWord(
+      "Open-source": HighlightedWord(
         onTap: () {
           showDialog(
               context: context,
@@ -163,6 +159,7 @@ class _HomePageState extends State<HomePage> {
         textStyle: textStyle,
       ),
     };
+    HighlightMap highlightMap = HighlightMap(words);
     return Scaffold(
       appBar: AppBar(
         title: Text("Text Highlight Example"),
@@ -177,7 +174,7 @@ class _HomePageState extends State<HomePage> {
               ),
               TextHighlight(
                 text: text,
-                words: words,
+                words: highlightMap.getMap,
                 textStyle: TextStyle(
                   fontSize: 20.0,
                   color: Colors.black,
