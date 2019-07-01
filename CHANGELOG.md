@@ -1,3 +1,7 @@
+## 0.5.0
+RangeError Solved.
+Thanks to [Artem](https://github.com/ashkryab)
+
 ## 0.4.0
 If the highlighted word has special characters then it is only highlighted if it has only one character.
 

@@ -26,6 +26,10 @@ class _HomePageState extends State<HomePage> {
       fontSize: 26.0,
     );
     Map<String, HighlightedWord> words = {
+      "DDDD": HighlightedWord(
+        onTap: () {},
+        textStyle: textStyle
+      ),
       "Flutter": HighlightedWord(
         onTap: () {
           showDialog(
@@ -165,27 +169,23 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Container(
         padding: EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            Text(
-              "With this plugin you can highlight words and create specific actions for each highlighted word, you can customize the style of each word separately or create a unique style for all of them, you can also customize the style of the rest of the text.",
-              style: TextStyle(
-                fontSize: 16.0,
+        child: SafeArea(
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 16.0,
               ),
-            ),
-            SizedBox(
-              height: 16.0,
-            ),
-            TextHighlight(
-              text: text,
-              words: words,
-              textStyle: TextStyle(
-                fontSize: 20.0,
-                color: Colors.black,
+              TextHighlight(
+                text: text,
+                words: words,
+                textStyle: TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.black,
+                ),
+                textAlign: TextAlign.justify,
               ),
-              textAlign: TextAlign.justify,
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -39,14 +39,10 @@ class TextHighlight extends StatefulWidget {
 class _TextHighlightState extends State<TextHighlight> {
   List<String> _textWords = List();
   bool isFirstWord = true;
-  @override
-  void initState() {
-    super.initState();
-    _textWords = widget.text.split(" ");
-  }
 
   @override
   Widget build(BuildContext context) {
+    _textWords = widget.text.split(" ");
     String firstWord = _textWords[0];
     _textWords.remove(firstWord);
     return RichText(
