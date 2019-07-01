@@ -1,3 +1,6 @@
+## 0.6.0
+Fixed the problem of the last word is not always highlighted.
+
 ## 0.5.0
 RangeError Solved.
 Thanks to [Artem](https://github.com/ashkryab)

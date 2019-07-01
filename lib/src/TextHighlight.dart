@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:highlight_text/src/HighlightedWord.dart';
 
-class TextHighlight extends StatefulWidget {
+class TextHighlight extends StatelessWidget {
   final String text;
   final Map<String, HighlightedWord> words;
   final TextStyle textStyle;
@@ -33,128 +33,60 @@ class TextHighlight extends StatefulWidget {
   });
 
   @override
-  _TextHighlightState createState() => _TextHighlightState();
-}
-
-class _TextHighlightState extends State<TextHighlight> {
-  List<String> _textWords = List();
-  bool isFirstWord = true;
-
-  @override
   Widget build(BuildContext context) {
-    _textWords = widget.text.split(" ");
-    String firstWord = _textWords[0];
-    _textWords.remove(firstWord);
+    List<String> _textWords = List();
+    _textWords = text.split(" ");
     return RichText(
-      text: _setTextSpan(firstWord, _textWords),
-      locale: widget.locale,
-      maxLines: widget.maxLines,
-      overflow: widget.overflow,
-      softWrap: widget.softWrap,
-      strutStyle: widget.strutStyle,
-      textAlign: widget.textAlign,
-      textDirection: widget.textDirection,
-      textScaleFactor: widget.textScaleFactor,
+      text: buildSpan(_textWords),
+      locale: locale,
+      maxLines: maxLines,
+      overflow: overflow,
+      softWrap: softWrap,
+      strutStyle: strutStyle,
+      textAlign: textAlign,
+      textDirection: textDirection,
+      textScaleFactor: textScaleFactor,
     );
   }
 
-  TextSpan _setTextSpan(String p, List<String> words) {
-    if (!isFirstWord) {
-      String nextWord = "";
-      if (words.length > 0) {
-        nextWord = words.first;
-        words.remove(nextWord);
-      }
-      String charLastRemoved = p[p.length - 1];
-      String wordLastRemoved = p.substring(0, p.length - 1);
-      bool lastRemoved = false;
-      if (widget.words.containsKey(p) ||
-          widget.words.containsKey(wordLastRemoved)) {
-        if (widget.words.containsKey(wordLastRemoved) &&
-            wordLastRemoved.length + 1 == p.length) lastRemoved = true;
+  TextSpan buildSpan(List<String> words) {
+    if (words.length > 0) {
+      String currentWord = words[0];
+      words.remove(currentWord);
+      String charLastRemoved = currentWord[currentWord.length - 1];
+      String wordLastRemoved = currentWord.substring(0, currentWord.length - 1);
+
+      if (this.words.containsKey(wordLastRemoved)) {
         return TextSpan(
-          text: !lastRemoved ? p + " " : wordLastRemoved,
-          children: <TextSpan>[
-            lastRemoved
-                ? TextSpan(
-                    text: charLastRemoved + " ",
-                    style: widget.textStyle,
-                    children: <TextSpan>[
-                      words.length > 0
-                          ? _setTextSpan(nextWord, words)
-                          : TextSpan(
-                              text: words.length >= 0 ? p + " " : nextWord,
-                              style: widget.textStyle,
-                            ),
-                    ],
-                  )
-                : words.length > 0
-                    ? _setTextSpan(nextWord, words)
-                    : words.length > 0
-                        ? TextSpan(
-                            text: p + " ",
-                          )
-                        : _singleHighlight(nextWord),
+          text: wordLastRemoved,
+          style: this.words[wordLastRemoved].textStyle,
+          children: [
+            TextSpan(
+              text: charLastRemoved + " ",
+              style: textStyle,
+            ),
+            buildSpan(words),
           ],
-          style: widget.words[!lastRemoved ? p : wordLastRemoved].textStyle,
           recognizer: TapGestureRecognizer()
-            ..onTap =
-                () => widget.words[!lastRemoved ? p : wordLastRemoved].onTap(),
+            ..onTap = () => this.words[wordLastRemoved].onTap(),
         );
       } else {
         return TextSpan(
-          text: p + " ",
-          style: widget.textStyle,
-          children: <TextSpan>[
-            words.length > 0
-                ? _setTextSpan(nextWord, words)
-                : TextSpan(
-                    text: words.length >= 0 ? p + " " : nextWord,
-                    style: widget.textStyle,
-                  ),
+          text: currentWord + " ",
+          style: this.words.containsKey(currentWord)
+              ? this.words[currentWord].textStyle
+              : textStyle,
+          children: [
+            buildSpan(words),
           ],
+          recognizer: this.words.containsKey(currentWord)
+              ? (TapGestureRecognizer()
+                ..onTap = () => this.words[currentWord].onTap())
+              : null,
         );
       }
     } else {
-      isFirstWord = false;
-      return TextSpan(
-        text: "",
-        style: widget.textStyle,
-        children: <TextSpan>[
-          _setTextSpan(p, words),
-        ],
-      );
-    }
-  }
-
-  TextSpan _singleHighlight(String word) {
-    String charLastRemoved = word[word.length - 1];
-    String wordLastRemoved = word.substring(0, word.length - 1);
-    bool lastRemoved = false;
-    if (widget.words.containsValue(word) ||
-        widget.words.containsKey(wordLastRemoved)) {
-      if (widget.words.containsKey(wordLastRemoved) &&
-          wordLastRemoved.length + 1 == word.length) lastRemoved = true;
-      return TextSpan(
-        text: !lastRemoved ? word + " " : wordLastRemoved,
-        style: widget.words[!lastRemoved ? word : wordLastRemoved].textStyle,
-        children: <TextSpan>[
-          lastRemoved
-              ? TextSpan(
-                  text: charLastRemoved,
-                  style: widget.textStyle,
-                )
-              : TextSpan(),
-        ],
-        recognizer: TapGestureRecognizer()
-          ..onTap =
-              () => widget.words[!lastRemoved ? word : wordLastRemoved].onTap(),
-      );
-    } else {
-      return TextSpan(
-        text: word,
-        style: widget.textStyle,
-      );
+      return TextSpan(text: "");
     }
   }
 }
