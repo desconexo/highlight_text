@@ -1,3 +1,6 @@
+## 0.7.2
+Health suggestions.
+
 ## 0.7.1
 Some corrections in the example.
 
