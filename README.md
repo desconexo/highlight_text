@@ -54,19 +54,14 @@ TextHighlight(
 ),
 ```
 
-## 0.7.0 Update
-Now you can choose to differentiate words with upper and lower case.
-To differentiate words by uppercase or lowercase letters just use as in the previous examples. To not differentiate words (text == TeXt) use the new HighlightMap class by passing its word library as a parameter.
+## 1.0.0 Breaking changes
 
-``` dart
-HighlightMap highlightMap = HighlightMap(words);
-```
-
-And then you pass the `highlightMap.getMap` as the `words` parameter in the `TextHighlight` widget
+Be carefull, `HighlightMap` is not working anymore, you should use `enableCaseSensitive` attribute in `TextHighlight` widget! By default the value of `enableCaseSensitive` is `false`, that means that any word will be highlighted (`'Flutter' == 'flutter'`, so it will be highlighted)
 
 ``` dart
 TextHighlight(
     text: text,
-    words: highlightMap.getMap,
+    words: words,
+    enableCaseSensitive: true // will highlight only exactly the same string ('Flutter' != 'flutter', so it will not be highlighted)
 ),
 ```

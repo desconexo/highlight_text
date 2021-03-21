@@ -1,3 +1,10 @@
+## 1.0.0
+Package reworked
+Added null safety support
+RangeError for a `HighlightedWord` ending with a blank space fixed
+Working with numbers
+`HighlightedWord` working with more than one word
+
 ## 0.7.2
 Health suggestions.
 

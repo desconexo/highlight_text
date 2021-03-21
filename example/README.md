@@ -1,45 +1,16 @@
-## Example
+# example
 
-You can see the complete example in the [GitHub Repository](https://github.com/desconexo/highlight_text/tree/master/example).
+A new Flutter project.
 
-Import the highlight library
-``` dart
-import 'package:highlight_text/highlight_text.dart';
-```
+## Getting Started
 
-You should use the `HighlightedWord` class to specify the dictionary words in a Map object
-``` dart
-Map<String, HighlightedWord> words = {
-    "Flutter": HighlightedWord(
-        onTap: () {
-            print("Flutter");
-        },
-        textStyle: textStyle,
-    ),
-    "open-source": HighlightedWord(
-        onTap: () {
-            print("open-source");
-        },
-        textStyle: textStyle,
-    ),
-    "Android": HighlightedWord(
-        onTap: () {
-            print("Android");
-        },
-        textStyle: textStyle,
-    ),
-};
-```
+This project is a starting point for a Flutter application.
 
-Now you can call the `TextHighlight` widget
-``` dart
-TextHighlight(
-    text: text, // You need to pass the string you want the highlights
-    words: words, // Your dictionary words
-    textStyle: TextStyle( // You can set the general style, like a Text()
-        fontSize: 20.0,
-        color: Colors.black,
-    ),
-    textAlign: TextAlign.justify, // You can use any attribute of the RichText widget
-),
-```
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
