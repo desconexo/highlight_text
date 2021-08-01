@@ -72,8 +72,9 @@ class TextHighlight extends StatelessWidget {
             word, '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
       } else {
         int strIndex = bindedText.toLowerCase().indexOf(word.toLowerCase());
-        bindedText = bindedText.replaceRange(strIndex, strIndex + word.length,
-            '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
+        if (strIndex > 0)
+          bindedText = bindedText.replaceRange(strIndex, strIndex + word.length,
+              '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
       }
     }
 
