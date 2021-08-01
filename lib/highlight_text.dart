@@ -100,8 +100,7 @@ class TextHighlight extends StatelessWidget {
         children: [
           _buildSpan(bindedWords),
         ],
-        recognizer: TapGestureRecognizer()
-          ..onTap = () => words[currentWord]!.onTap(),
+        recognizer: TapGestureRecognizer()..onTap = words[currentWord]!.onTap,
       );
     }
 
