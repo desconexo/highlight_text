@@ -16,13 +16,25 @@ class _HomePageState extends State<HomePage> {
   final String text =
       "Flutter is an open-source mobile application development framework created by Google. It is used to develop applications for Android and iOS, as well as being the primary method of creating applications for Google Fuchsia.";
 
+  final EdgeInsetsGeometry padding = EdgeInsets.all(8.0);
+
+  final BoxDecoration decoration = BoxDecoration(
+    color: Colors.green,
+    borderRadius: BorderRadius.circular(50),
+  );
+
+  final TextStyle textStyle = TextStyle(
+    color: Colors.red,
+    fontSize: 26.0,
+  );
+
+  Map<String, HighlightedWord>? words;
+
   @override
-  Widget build(BuildContext context) {
-    TextStyle textStyle = TextStyle(
-      color: Colors.red,
-      fontSize: 26.0,
-    );
-    Map<String, HighlightedWord> words = {
+  void initState() {
+    super.initState();
+
+    words = {
       "flutter ": HighlightedWord(
         onTap: () {
           showDialog(
@@ -44,6 +56,8 @@ class _HomePageState extends State<HomePage> {
               });
         },
         textStyle: textStyle,
+        decoration: decoration,
+        padding: padding,
       ),
       "Open-source": HighlightedWord(
         onTap: () {
@@ -88,6 +102,8 @@ class _HomePageState extends State<HomePage> {
               });
         },
         textStyle: textStyle,
+        decoration: decoration,
+        padding: padding,
       ),
       "iOS": HighlightedWord(
         onTap: () {
@@ -154,6 +170,8 @@ class _HomePageState extends State<HomePage> {
               });
         },
         textStyle: textStyle,
+        decoration: decoration,
+        padding: padding,
       ),
       "development framework": HighlightedWord(
         onTap: () {
@@ -178,7 +196,10 @@ class _HomePageState extends State<HomePage> {
         textStyle: textStyle,
       ),
     };
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Text Highlight Example"),

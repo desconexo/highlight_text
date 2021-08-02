@@ -2,16 +2,19 @@ library highlight_text;
 
 import 'dart:collection';
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class HighlightedWord {
   final TextStyle textStyle;
   final VoidCallback onTap;
+  final BoxDecoration? decoration;
+  final EdgeInsetsGeometry? padding;
 
   HighlightedWord({
     required this.onTap,
     required this.textStyle,
+    this.decoration,
+    this.padding,
   });
 }
 
@@ -95,12 +98,22 @@ class TextHighlight extends StatelessWidget {
     if (index != null) {
       String currentWord = words.keys.toList()[index];
       return TextSpan(
-        text: currentWord,
-        style: words[currentWord]!.textStyle,
         children: [
+          WidgetSpan(
+            child: GestureDetector(
+              onTap: words[currentWord]!.onTap,
+              child: Container(
+                padding: words[currentWord]!.padding,
+                decoration: words[currentWord]!.decoration,
+                child: Text(
+                  currentWord,
+                  style: words[currentWord]!.textStyle,
+                ),
+              ),
+            ),
+          ),
           _buildSpan(bindedWords),
         ],
-        recognizer: TapGestureRecognizer()..onTap = words[currentWord]!.onTap,
       );
     }
 
