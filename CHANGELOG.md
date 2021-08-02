@@ -1,3 +1,7 @@
+## 1.1.0
+Fixed error when you add a word in the dictionary that is not in the sentence.
+Added `BoxDecoration` (called `decoration`) and `EdgeInsetsGeometry` (called `padding`) to `HighlightedWord` object, now you can customize your words better.
+
 ## 1.0.0
 Package reworked
 Added null safety support

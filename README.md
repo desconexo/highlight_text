@@ -54,6 +54,23 @@ TextHighlight(
 ),
 ```
 
+## 1.1.0 Update
+
+Now you can customize better the words you highlight, just like a `Container`.
+It was added `decoration` and `padding` fields to `HighlightedWord` object, so you can do whatever you want to customize it.
+
+``` dart
+HighlightedWord(
+    onTap: () {},
+    textStyle: textStyle,
+    decoration: BoxDecoration(
+        color: Colors.green,
+        borderRadius: BorderRadius.circular(50),
+    ),
+    padding: EdgeInsets.all(8.0),
+),
+```
+
 ## 1.0.0 Breaking changes
 
 Added null safety support.
