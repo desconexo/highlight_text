@@ -4,6 +4,7 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 
+/// It stores the layout data about a word
 class HighlightedWord {
   final TextStyle textStyle;
   final VoidCallback onTap;
@@ -18,6 +19,7 @@ class HighlightedWord {
   });
 }
 
+/// TextHighlight will provide you a easy way to display highlighted words on your app
 class TextHighlight extends StatelessWidget {
   final String text;
   final LinkedHashMap<String, HighlightedWord> words;
