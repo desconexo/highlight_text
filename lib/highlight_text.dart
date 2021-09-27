@@ -1,7 +1,5 @@
 library highlight_text;
 
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 
 /// It stores the layout data about a word
@@ -22,7 +20,7 @@ class HighlightedWord {
 /// TextHighlight will provide you a easy way to display highlighted words on your app
 class TextHighlight extends StatelessWidget {
   final String text;
-  final LinkedHashMap<String, HighlightedWord> words;
+  final Map<String, HighlightedWord> words;
   final TextStyle textStyle;
   final TextAlign textAlign;
   final TextDirection? textDirection;
@@ -32,7 +30,7 @@ class TextHighlight extends StatelessWidget {
   final int? maxLines;
   final Locale? locale;
   final StrutStyle? strutStyle;
-  final bool enableCaseSensitive;
+  final bool matchCase;
 
   TextHighlight({
     required this.text,
@@ -49,7 +47,7 @@ class TextHighlight extends StatelessWidget {
     this.maxLines,
     this.locale,
     this.strutStyle,
-    this.enableCaseSensitive = false,
+    this.matchCase = false,
   });
 
   @override
@@ -70,30 +68,30 @@ class TextHighlight extends StatelessWidget {
   }
 
   List<String> _bind() {
-    String bindedText = text;
+    String boundText = text;
     for (String word in words.keys) {
-      if (enableCaseSensitive) {
-        bindedText = bindedText.replaceAll(
-            word, '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
-      } else {
-        int strIndex = bindedText.toLowerCase().indexOf(word.toLowerCase());
+      if (matchCase) {
+        int strIndex = boundText.toLowerCase().indexOf(word.toLowerCase());
         if (strIndex > 0)
-          bindedText = bindedText.replaceRange(strIndex, strIndex + word.length,
+          boundText = boundText.replaceRange(strIndex, strIndex + word.length,
               '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
+      } else {
+        boundText = boundText.replaceAll(
+            word, '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
       }
     }
 
-    List<String> splitedTexts = bindedText.split("<highlight>");
-    splitedTexts.removeWhere((s) => s.isEmpty);
+    List<String> splitTexts = boundText.split("<highlight>");
+    splitTexts.removeWhere((s) => s.isEmpty);
 
-    return splitedTexts;
+    return splitTexts;
   }
 
-  TextSpan _buildSpan(List<String> bindedWords) {
-    if (bindedWords.isEmpty) return TextSpan();
+  TextSpan _buildSpan(List<String> boundWords) {
+    if (boundWords.isEmpty) return TextSpan();
 
-    String nextToDisplay = bindedWords.first;
-    bindedWords.removeAt(0);
+    String nextToDisplay = boundWords.first;
+    boundWords.removeAt(0);
 
     int? index = int.tryParse(nextToDisplay);
 
@@ -114,7 +112,7 @@ class TextHighlight extends StatelessWidget {
               ),
             ),
           ),
-          _buildSpan(bindedWords),
+          _buildSpan(boundWords),
         ],
       );
     }
@@ -123,7 +121,7 @@ class TextHighlight extends StatelessWidget {
       text: nextToDisplay,
       style: textStyle,
       children: [
-        _buildSpan(bindedWords),
+        _buildSpan(boundWords),
       ],
     );
   }

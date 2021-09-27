@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:highlight_text/highlight_text.dart';
 
@@ -28,7 +26,7 @@ class _HomePageState extends State<HomePage> {
     fontSize: 26.0,
   );
 
-  Map<String, HighlightedWord>? words;
+  late Map<String, HighlightedWord> words;
 
   @override
   void initState() {
@@ -85,7 +83,7 @@ class _HomePageState extends State<HomePage> {
         onTap: () {
           showDialog(
               context: context,
-              builder: (contextb) {
+              builder: (context) {
                 return AlertDialog(
                   title: Text("Android"),
                   content: Text(
@@ -93,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                   actions: <Widget>[
                     TextButton(
                       onPressed: () {
-                        Navigator.of(contextb).pop();
+                        Navigator.of(context).pop();
                       },
                       child: Text("Ok"),
                     )
@@ -109,7 +107,7 @@ class _HomePageState extends State<HomePage> {
         onTap: () {
           showDialog(
               context: context,
-              builder: (contextb) {
+              builder: (context) {
                 return AlertDialog(
                   title: Text("iOS"),
                   content: Text(
@@ -117,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                   actions: <Widget>[
                     TextButton(
                       onPressed: () {
-                        Navigator.of(contextb).pop();
+                        Navigator.of(context).pop();
                       },
                       child: Text("Ok"),
                     )
@@ -131,7 +129,7 @@ class _HomePageState extends State<HomePage> {
         onTap: () {
           showDialog(
               context: context,
-              builder: (contextb) {
+              builder: (context) {
                 return AlertDialog(
                   title: Text("Fuchsia"),
                   content: Text(
@@ -139,7 +137,7 @@ class _HomePageState extends State<HomePage> {
                   actions: <Widget>[
                     TextButton(
                       onPressed: () {
-                        Navigator.of(contextb).pop();
+                        Navigator.of(context).pop();
                       },
                       child: Text("Ok"),
                     )
@@ -153,7 +151,7 @@ class _HomePageState extends State<HomePage> {
         onTap: () {
           showDialog(
               context: context,
-              builder: (contextb) {
+              builder: (context) {
                 return AlertDialog(
                   title: Text("Google"),
                   content: Text(
@@ -161,7 +159,7 @@ class _HomePageState extends State<HomePage> {
                   actions: <Widget>[
                     TextButton(
                       onPressed: () {
-                        Navigator.of(contextb).pop();
+                        Navigator.of(context).pop();
                       },
                       child: Text("Ok"),
                     )
@@ -177,7 +175,7 @@ class _HomePageState extends State<HomePage> {
         onTap: () {
           showDialog(
               context: context,
-              builder: (contextb) {
+              builder: (context) {
                 return AlertDialog(
                   title: Text("development framework"),
                   content: Text(
@@ -185,7 +183,7 @@ class _HomePageState extends State<HomePage> {
                   actions: <Widget>[
                     TextButton(
                       onPressed: () {
-                        Navigator.of(contextb).pop();
+                        Navigator.of(context).pop();
                       },
                       child: Text("Ok"),
                     )
@@ -214,7 +212,8 @@ class _HomePageState extends State<HomePage> {
               ),
               TextHighlight(
                 text: text,
-                words: words as LinkedHashMap<String, HighlightedWord>,
+                words: words,
+                matchCase: true,
                 textStyle: TextStyle(
                   fontSize: 20.0,
                   color: Colors.black,
