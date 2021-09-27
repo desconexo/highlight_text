@@ -1,3 +1,8 @@
+## 1.2.0
+Fixed first word not matching
+Renamed `enabledCaseSensitive` to `matchCase` to be clearer about what it does
+`matchCase: false` will keep the original word
+
 ## 1.1.0
 Fixed error when you add a word in the dictionary that is not in the sentence.
 Added `BoxDecoration` (called `decoration`) and `EdgeInsetsGeometry` (called `padding`) to `HighlightedWord` object, now you can customize your words better.

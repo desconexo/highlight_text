@@ -71,16 +71,14 @@ HighlightedWord(
 ),
 ```
 
-## 1.0.0 Breaking changes
+## 1.2.0 Breaking changes
 
-Added null safety support.
-
-Be carefull, `HighlightMap` is not working anymore, you should use `enableCaseSensitive` attribute in `TextHighlight` widget! By default the value of `enableCaseSensitive` is `false`, that means that any word will be highlighted (`'Flutter' == 'flutter'`, so it will be highlighted)
+`enableCaseSensitive` renamed to `matchCase` to be clearer about what it does
 
 ``` dart
 TextHighlight(
     text: text,
     words: words,
-    enableCaseSensitive: true // will highlight only exactly the same string ('Flutter' != 'flutter', so it will not be highlighted)
+    matchCase: true // will highlight only exactly the same string
 ),
 ```

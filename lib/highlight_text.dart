@@ -73,15 +73,16 @@ class TextHighlight extends StatelessWidget {
     String boundText = text;
     for (String word in words.keys) {
       if (matchCase) {
+        boundText = boundText.replaceAll(
+            word, '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
+      } else {
         int strIndex = boundText.toLowerCase().indexOf(word.toLowerCase());
         if (strIndex >= 0) {
-          originalWords.addAll({word: boundText.substring(strIndex, strIndex + word.length)});
+          originalWords.addAll(
+              {word: boundText.substring(strIndex, strIndex + word.length)});
           boundText = boundText.replaceRange(strIndex, strIndex + word.length,
               '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
         }
-      } else {
-        boundText = boundText.replaceAll(
-            word, '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
       }
     }
 
