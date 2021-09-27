@@ -32,6 +32,8 @@ class TextHighlight extends StatelessWidget {
   final StrutStyle? strutStyle;
   final bool matchCase;
 
+  final Map<String, String> originalWords = <String, String>{};
+
   TextHighlight({
     required this.text,
     required this.words,
@@ -72,9 +74,11 @@ class TextHighlight extends StatelessWidget {
     for (String word in words.keys) {
       if (matchCase) {
         int strIndex = boundText.toLowerCase().indexOf(word.toLowerCase());
-        if (strIndex >= 0)
+        if (strIndex >= 0) {
+          originalWords.addAll({word: boundText.substring(strIndex, strIndex + word.length)});
           boundText = boundText.replaceRange(strIndex, strIndex + word.length,
               '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
+        }
       } else {
         boundText = boundText.replaceAll(
             word, '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
@@ -97,6 +101,7 @@ class TextHighlight extends StatelessWidget {
 
     if (index != null) {
       String currentWord = words.keys.toList()[index];
+      String showWord = matchCase ? originalWords[currentWord]! : currentWord;
       return TextSpan(
         children: [
           WidgetSpan(
@@ -106,7 +111,7 @@ class TextHighlight extends StatelessWidget {
                 padding: words[currentWord]!.padding,
                 decoration: words[currentWord]!.decoration,
                 child: Text(
-                  currentWord,
+                  showWord,
                   style: words[currentWord]!.textStyle,
                 ),
               ),

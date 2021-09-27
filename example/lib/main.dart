@@ -33,30 +33,6 @@ class _HomePageState extends State<HomePage> {
     super.initState();
 
     words = {
-      "abc": HighlightedWord(
-        onTap: () {
-          showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  title: Text("Flutter"),
-                  content: Text(
-                      "Flutter's engine, written primarily in C++, provides low-level rendering support using Google's Skia graphics library."),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text("Ok"),
-                    )
-                  ],
-                );
-              });
-        },
-        textStyle: textStyle,
-        decoration: decoration,
-        padding: padding,
-      ),
       "flutter": HighlightedWord(
         onTap: () {
           showDialog(
@@ -81,7 +57,7 @@ class _HomePageState extends State<HomePage> {
         decoration: decoration,
         padding: padding,
       ),
-      "Open-source": HighlightedWord(
+      "open-source": HighlightedWord(
         onTap: () {
           showDialog(
               context: context,
