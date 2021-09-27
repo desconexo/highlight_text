@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="82a68c89-de80-4008-aa34-4e27b2078a8a" name="Default Changelist" comment="renamed enableCaseSensitive to matchCase and fix it">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+    <list default="true" id="82a68c89-de80-4008-aa34-4e27b2078a8a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highlight_text.iml" beforeDir="false" afterPath="$PROJECT_DIR$/highlight_text.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/highlight_text.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/highlight_text.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,13 +44,25 @@
       <option name="presentableId" value="Default" />
       <updated>1616332971430</updated>
     </task>
+    <task id="LOCAL-00001" summary="renamed enableCaseSensitive to matchCase and fix it">
+      <created>1632755145325</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1632755145325</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="renamed enableCaseSensitive to matchCase and fix it" />
+    <option name="LAST_COMMIT_MESSAGE" value="renamed enableCaseSensitive to matchCase and fix it" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="424" y="3" key="CommitChangelistDialog2" timestamp="1632754946955">
+    <state x="424" y="3" key="CommitChangelistDialog2" timestamp="1632755143571">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state x="424" y="3" key="CommitChangelistDialog2/1920.0.1536.816/0.0.1536.816@0.0.1536.816" timestamp="1632754946955" />
+    <state x="424" y="3" key="CommitChangelistDialog2/1920.0.1536.816/0.0.1536.816@0.0.1536.816" timestamp="1632755143571" />
     <state x="548" y="163" key="FileChooserDialogImpl" timestamp="1632754362543">
       <screen x="0" y="0" width="1536" height="816" />
     </state>

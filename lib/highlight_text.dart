@@ -72,7 +72,7 @@ class TextHighlight extends StatelessWidget {
     for (String word in words.keys) {
       if (matchCase) {
         int strIndex = boundText.toLowerCase().indexOf(word.toLowerCase());
-        if (strIndex > 0)
+        if (strIndex >= 0)
           boundText = boundText.replaceRange(strIndex, strIndex + word.length,
               '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
       } else {
