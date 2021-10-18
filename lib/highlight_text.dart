@@ -102,7 +102,7 @@ class TextHighlight extends StatelessWidget {
 
     if (index != null) {
       String currentWord = words.keys.toList()[index];
-      String showWord = matchCase ? originalWords[currentWord]! : currentWord;
+      String showWord = matchCase ? currentWord : originalWords[currentWord]!;
       return TextSpan(
         children: [
           WidgetSpan(

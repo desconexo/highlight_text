@@ -1,3 +1,6 @@
+## 1.2.1
+matchCase fixed
+
 ## 1.2.0
 Fixed first word not matching
 Renamed `enabledCaseSensitive` to `matchCase` to be clearer about what it does

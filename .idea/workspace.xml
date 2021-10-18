@@ -4,10 +4,9 @@
     <list default="true" id="82a68c89-de80-4008-aa34-4e27b2078a8a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/highlight_text.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/highlight_text.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -69,31 +68,39 @@
       <option name="project" value="LOCAL" />
       <updated>1632756740495</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="version upgrade and matchCase fixed">
+      <created>1632757720646</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1632757720646</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="renamed enableCaseSensitive to matchCase and fix it" />
     <MESSAGE value="fix first word not matching" />
     <MESSAGE value="matchCase keep the original word" />
-    <option name="LAST_COMMIT_MESSAGE" value="matchCase keep the original word" />
+    <MESSAGE value="version upgrade and matchCase fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="version upgrade and matchCase fixed" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="424" y="3" key="CommitChangelistDialog2" timestamp="1632757521952">
+    <state x="424" y="3" key="CommitChangelistDialog2" timestamp="1632757719089">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state x="424" y="3" key="CommitChangelistDialog2/1920.0.1536.816/0.0.1536.816@0.0.1536.816" timestamp="1632757521952" />
-    <state x="548" y="163" key="FileChooserDialogImpl" timestamp="1632754362543">
+    <state x="424" y="3" key="CommitChangelistDialog2/1920.0.1536.816/0.0.1536.816@0.0.1536.816" timestamp="1632757719089" />
+    <state x="548" y="163" key="FileChooserDialogImpl" timestamp="1634236921980">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state x="548" y="163" key="FileChooserDialogImpl/1920.0.1536.816/0.0.1536.816@0.0.1536.816" timestamp="1632754362543" />
+    <state x="548" y="163" key="FileChooserDialogImpl/1920.0.1536.816/0.0.1536.816@0.0.1536.816" timestamp="1634236921980" />
     <state x="277" y="51" key="SettingsEditor" timestamp="1632753710508">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="277" y="51" key="SettingsEditor/1920.0.1536.816/0.0.1536.816@0.0.1536.816" timestamp="1632753710508" />
-    <state x="93" y="93" width="1350" height="630" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1632754590876">
+    <state x="93" y="93" width="1350" height="630" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1634156630854">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state x="93" y="93" width="1350" height="630" key="com.android.tools.idea.avdmanager.AvdListDialog/1920.0.1536.816/0.0.1536.816@0.0.1536.816" timestamp="1632754590876" />
+    <state x="93" y="93" width="1350" height="630" key="com.android.tools.idea.avdmanager.AvdListDialog/1920.0.1536.816/0.0.1536.816@0.0.1536.816" timestamp="1634156630854" />
   </component>
 </project>
