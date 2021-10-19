@@ -1,5 +1,8 @@
+## 1.3.0
+Added `binding` parameter to `TextHighlight`, now you can define what occurrence you want to highlight with `HighlightBinding` enum.
+
 ## 1.2.1
-matchCase fixed
+`matchCase` fixed
 
 ## 1.2.0
 Fixed first word not matching

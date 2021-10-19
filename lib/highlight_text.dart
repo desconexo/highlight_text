@@ -2,6 +2,18 @@ library highlight_text;
 
 import 'package:flutter/material.dart';
 
+/// Defines what occurrence you want to highligh
+enum HighlightBinding {
+  /// Highlights all occurrences of a word
+  all,
+
+  /// Highlights only the first occurrence
+  first,
+
+  /// Highlights only the last occurrence
+  last,
+}
+
 /// It stores the layout data about a word
 class HighlightedWord {
   final TextStyle textStyle;
@@ -31,8 +43,9 @@ class TextHighlight extends StatelessWidget {
   final Locale? locale;
   final StrutStyle? strutStyle;
   final bool matchCase;
+  final HighlightBinding binding;
 
-  final Map<String, String> originalWords = <String, String>{};
+  final Map<String, List<String>> originalWords = <String, List<String>>{};
 
   TextHighlight({
     required this.text,
@@ -50,6 +63,7 @@ class TextHighlight extends StatelessWidget {
     this.locale,
     this.strutStyle,
     this.matchCase = false,
+    this.binding = HighlightBinding.all,
   });
 
   @override
@@ -69,24 +83,102 @@ class TextHighlight extends StatelessWidget {
     );
   }
 
-  List<String> _bind() {
+  String _multipleBinding() {
     String boundText = text;
+
     for (String word in words.keys) {
+      originalWords.addAll({word: <String>[]});
+
       if (matchCase) {
         boundText = boundText.replaceAll(
             word, '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
       } else {
+        for (int i = 0; i < word.allMatches(text).length; i++) {
+          int strIndex = boundText.toLowerCase().indexOf(word.toLowerCase());
+          if (strIndex >= 0) {
+            originalWords[word]!
+                .add(boundText.substring(strIndex, strIndex + word.length));
+
+            boundText = boundText.replaceRange(strIndex, strIndex + word.length,
+                '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
+          }
+        }
+      }
+    }
+
+    return boundText;
+  }
+
+  String _firstWordBinding() {
+    String boundText = text;
+
+    for (String word in words.keys) {
+      originalWords.addAll({word: <String>[]});
+
+      if (matchCase) {
+        int strIndex = boundText.indexOf(word);
+        int strLastIndex = strIndex + word.length;
+        boundText = boundText.replaceRange(strIndex, strLastIndex,
+            '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
+      } else {
         int strIndex = boundText.toLowerCase().indexOf(word.toLowerCase());
+        int strLastIndex = strIndex + word.length;
         if (strIndex >= 0) {
-          originalWords.addAll(
-              {word: boundText.substring(strIndex, strIndex + word.length)});
-          boundText = boundText.replaceRange(strIndex, strIndex + word.length,
+          originalWords[word]!
+              .add(boundText.substring(strIndex, strIndex + word.length));
+
+          boundText = boundText.replaceRange(strIndex, strLastIndex,
               '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
         }
       }
     }
 
-    List<String> splitTexts = boundText.split("<highlight>");
+    return boundText;
+  }
+
+  String _lastWordBinding() {
+    String boundText = text;
+
+    for (String word in words.keys) {
+      originalWords.addAll({word: <String>[]});
+
+      if (matchCase) {
+        int strIndex = boundText.lastIndexOf(word);
+        int strLastIndex = strIndex + word.length;
+        boundText = boundText.replaceRange(strIndex, strLastIndex,
+            '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
+      } else {
+        int strIndex = boundText.toLowerCase().lastIndexOf(word.toLowerCase());
+        int strLastIndex = strIndex + word.length;
+        if (strIndex >= 0) {
+          originalWords[word]!
+              .add(boundText.substring(strIndex, strIndex + word.length));
+
+          boundText = boundText.replaceRange(strIndex, strLastIndex,
+              '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
+        }
+      }
+    }
+
+    return boundText;
+  }
+
+  List<String> _bind() {
+    String boundWords;
+
+    switch (binding) {
+      case HighlightBinding.first:
+        boundWords = _firstWordBinding();
+        break;
+      case HighlightBinding.last:
+        boundWords = _lastWordBinding();
+        break;
+      case HighlightBinding.all:
+      default:
+        boundWords = _multipleBinding();
+    }
+
+    List<String> splitTexts = boundWords.split("<highlight>");
     splitTexts.removeWhere((s) => s.isEmpty);
 
     return splitTexts;
@@ -102,7 +194,14 @@ class TextHighlight extends StatelessWidget {
 
     if (index != null) {
       String currentWord = words.keys.toList()[index];
-      String showWord = matchCase ? currentWord : originalWords[currentWord]!;
+      String showWord;
+      if (matchCase) {
+        showWord = currentWord;
+      } else {
+        showWord = originalWords[currentWord]!.first;
+        originalWords[currentWord]!.removeAt(0);
+      }
+
       return TextSpan(
         children: [
           WidgetSpan(

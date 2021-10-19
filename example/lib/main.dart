@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:highlight_text/highlight_text.dart';
 
 void main() {
-  runApp(MaterialApp(home: MyHomePage()));
+  runApp(MaterialApp(home: HomePage()));
 }
 
 class HomePage extends StatefulWidget {
@@ -221,46 +221,6 @@ class _HomePageState extends State<HomePage> {
                 textAlign: TextAlign.justify,
               ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-  Map<String, HighlightedWord> words = <String, HighlightedWord>{
-    "testing": HighlightedWord(
-      textStyle: TextStyle(
-        color: Colors.red,
-      ),
-      onTap: () {},
-    ),
-  };
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(20),
-          child: TextHighlight(
-            text: "Testing the height of the first word",
-            words: words,
-            matchCase: true,
-            textStyle: TextStyle(
-              color: Colors.black,
-              fontSize: 20,
-            ),
-            textAlign: TextAlign.left,
           ),
         ),
       ),

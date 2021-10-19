@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="82a68c89-de80-4008-aa34-4e27b2078a8a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/highlight_text.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/highlight_text.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-    </list>
+    <list default="true" id="82a68c89-de80-4008-aa34-4e27b2078a8a" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -75,7 +68,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632757720646</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="matchCase fix">
+      <created>1634560670217</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1634560670218</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -83,13 +83,14 @@
     <MESSAGE value="fix first word not matching" />
     <MESSAGE value="matchCase keep the original word" />
     <MESSAGE value="version upgrade and matchCase fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="version upgrade and matchCase fixed" />
+    <MESSAGE value="matchCase fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="matchCase fix" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="424" y="3" key="CommitChangelistDialog2" timestamp="1632757719089">
+    <state x="424" y="3" key="CommitChangelistDialog2" timestamp="1634560668771">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
-    <state x="424" y="3" key="CommitChangelistDialog2/1920.0.1536.816/0.0.1536.816@0.0.1536.816" timestamp="1632757719089" />
+    <state x="424" y="3" key="CommitChangelistDialog2/1920.0.1536.816/0.0.1536.816@0.0.1536.816" timestamp="1634560668771" />
     <state x="548" y="163" key="FileChooserDialogImpl" timestamp="1634236921980">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
