@@ -17,13 +17,13 @@ enum HighlightBinding {
 /// It stores the layout data about a word
 class HighlightedWord {
   final TextStyle textStyle;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final BoxDecoration? decoration;
   final EdgeInsetsGeometry? padding;
 
   HighlightedWord({
-    required this.onTap,
     required this.textStyle,
+    this.onTap,
     this.decoration,
     this.padding,
   });
@@ -206,7 +206,7 @@ class TextHighlight extends StatelessWidget {
         children: [
           WidgetSpan(
             child: GestureDetector(
-              onTap: words[currentWord]!.onTap,
+              onTap: words[currentWord]!.onTap ?? () {},
               child: Container(
                 padding: words[currentWord]!.padding,
                 decoration: words[currentWord]!.decoration,
