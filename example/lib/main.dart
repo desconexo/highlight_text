@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
 
   final TextStyle textStyle = TextStyle(
     color: Colors.red,
-    fontSize: 26.0,
+    fontSize: 14.0,
   );
 
   late Map<String, HighlightedWord> words;
@@ -215,7 +215,7 @@ class _HomePageState extends State<HomePage> {
                 words: words,
                 matchCase: true,
                 textStyle: TextStyle(
-                  fontSize: 20.0,
+                  fontSize: 14.0,
                   color: Colors.black,
                 ),
                 textAlign: TextAlign.justify,

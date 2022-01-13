@@ -16,13 +16,13 @@ enum HighlightBinding {
 
 /// It stores the layout data about a word
 class HighlightedWord {
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
   final VoidCallback? onTap;
   final BoxDecoration? decoration;
   final EdgeInsetsGeometry? padding;
 
   HighlightedWord({
-    required this.textStyle,
+    this.textStyle,
     this.onTap,
     this.decoration,
     this.padding,
@@ -33,7 +33,7 @@ class HighlightedWord {
 class TextHighlight extends StatelessWidget {
   final String text;
   final Map<String, HighlightedWord> words;
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
   final TextAlign textAlign;
   final TextDirection? textDirection;
   final bool softWrap;
@@ -50,10 +50,7 @@ class TextHighlight extends StatelessWidget {
   TextHighlight({
     required this.text,
     required this.words,
-    this.textStyle = const TextStyle(
-      fontSize: 25.0,
-      color: Colors.black,
-    ),
+    this.textStyle,
     this.textAlign = TextAlign.start,
     this.textDirection,
     this.softWrap = true,
@@ -212,7 +209,7 @@ class TextHighlight extends StatelessWidget {
                 decoration: words[currentWord]!.decoration,
                 child: Text(
                   showWord,
-                  style: words[currentWord]!.textStyle,
+                  style: words[currentWord]!.textStyle ?? textStyle,
                 ),
               ),
             ),
