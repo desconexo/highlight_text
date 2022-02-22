@@ -1,3 +1,6 @@
+## 1.4.0
+`style` and `onTap` for `HighlightedWord` and `TextHighlight` are now optional.
+
 ## 1.3.0
 Added `binding` parameter to `TextHighlight`, now you can define what occurrence you want to highlight with `HighlightBinding` enum.
 

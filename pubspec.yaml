@@ -1,6 +1,6 @@
 name: highlight_text
 description: With this package you can highlight words and create specific styles and actions.
-version: 1.3.0
+version: 1.4.0
 homepage: https://github.com/desconexo/highlight_text
 
 environment:

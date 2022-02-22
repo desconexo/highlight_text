@@ -147,7 +147,7 @@ class _HomePageState extends State<HomePage> {
         },
         textStyle: textStyle,
       ),
-      "Google": HighlightedWord(
+      "goo": HighlightedWord(
         onTap: () {
           showDialog(
               context: context,
@@ -213,7 +213,7 @@ class _HomePageState extends State<HomePage> {
               TextHighlight(
                 text: text,
                 words: words,
-                matchCase: true,
+                matchCase: false,
                 textStyle: TextStyle(
                   fontSize: 14.0,
                   color: Colors.black,
