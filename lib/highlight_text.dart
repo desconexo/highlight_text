@@ -190,33 +190,37 @@ class TextHighlight extends StatelessWidget {
     int? index = int.tryParse(nextToDisplay);
 
     if (index != null) {
-      String currentWord = words.keys.toList()[index];
-      String showWord;
-      if (matchCase) {
-        showWord = currentWord;
-      } else {
-        showWord = originalWords[currentWord]!.first;
-        originalWords[currentWord]!.removeAt(0);
-      }
+      try {
+        String currentWord = words.keys.toList()[index];
+        String showWord;
+        if (matchCase) {
+          showWord = currentWord;
+        } else {
+          showWord = originalWords[currentWord]!.first;
+          originalWords[currentWord]!.removeAt(0);
+        }
 
-      return TextSpan(
-        children: [
-          WidgetSpan(
-            child: GestureDetector(
-              onTap: words[currentWord]!.onTap ?? () {},
-              child: Container(
-                padding: words[currentWord]!.padding,
-                decoration: words[currentWord]!.decoration,
-                child: Text(
-                  showWord,
-                  style: words[currentWord]!.textStyle ?? textStyle,
+        return TextSpan(
+          children: [
+            WidgetSpan(
+              child: GestureDetector(
+                onTap: words[currentWord]!.onTap ?? () {},
+                child: Container(
+                  padding: words[currentWord]!.padding,
+                  decoration: words[currentWord]!.decoration,
+                  child: Text(
+                    showWord,
+                    style: words[currentWord]!.textStyle ?? textStyle,
+                  ),
                 ),
               ),
             ),
-          ),
-          _buildSpan(boundWords),
-        ],
-      );
+            _buildSpan(boundWords),
+          ],
+        );
+      } catch (e) {
+        if (boundWords.length > 1) throw e;
+      }
     }
 
     return TextSpan(
