@@ -1,3 +1,8 @@
+## 1.4.1
+
+Highlight words without highlighting subwords.
+Thanks to [Enloc](https://github.com/enloc-port)
+
 ## 1.4.0
 
 `style` and `onTap` for `HighlightedWord` and `TextHighlight` are now optional.
