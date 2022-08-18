@@ -88,7 +88,7 @@ class TextHighlight extends StatelessWidget {
 
       if (matchCase) {
         boundText = boundText.replaceAll(
-            word, '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
+            word, '|${words.keys.toList().indexOf(word)}|');
       } else {
         for (int i = 0; i < word.allMatches(text.toLowerCase()).length; i++) {
           int strIndex = boundText.toLowerCase().indexOf(word.toLowerCase());
@@ -97,7 +97,7 @@ class TextHighlight extends StatelessWidget {
                 .add(boundText.substring(strIndex, strIndex + word.length));
 
             boundText = boundText.replaceRange(strIndex, strIndex + word.length,
-                '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
+                '|${words.keys.toList().indexOf(word)}|');
           }
         }
       }
@@ -116,7 +116,7 @@ class TextHighlight extends StatelessWidget {
         int strIndex = boundText.indexOf(word);
         int strLastIndex = strIndex + word.length;
         boundText = boundText.replaceRange(strIndex, strLastIndex,
-            '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
+            '|${words.keys.toList().indexOf(word)}|');
       } else {
         int strIndex = boundText.toLowerCase().indexOf(word.toLowerCase());
         int strLastIndex = strIndex + word.length;
@@ -125,7 +125,7 @@ class TextHighlight extends StatelessWidget {
               .add(boundText.substring(strIndex, strIndex + word.length));
 
           boundText = boundText.replaceRange(strIndex, strLastIndex,
-              '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
+              '|${words.keys.toList().indexOf(word)}|');
         }
       }
     }
@@ -143,7 +143,7 @@ class TextHighlight extends StatelessWidget {
         int strIndex = boundText.lastIndexOf(word);
         int strLastIndex = strIndex + word.length;
         boundText = boundText.replaceRange(strIndex, strLastIndex,
-            '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
+            '|${words.keys.toList().indexOf(word)}|');
       } else {
         int strIndex = boundText.toLowerCase().lastIndexOf(word.toLowerCase());
         int strLastIndex = strIndex + word.length;
@@ -152,7 +152,7 @@ class TextHighlight extends StatelessWidget {
               .add(boundText.substring(strIndex, strIndex + word.length));
 
           boundText = boundText.replaceRange(strIndex, strLastIndex,
-              '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
+              '|${words.keys.toList().indexOf(word)}|');
         }
       }
     }
@@ -175,7 +175,7 @@ class TextHighlight extends StatelessWidget {
         boundWords = _multipleBinding();
     }
 
-    List<String> splitTexts = boundWords.split("<highlight>");
+    List<String> splitTexts = boundWords.split("|");
     splitTexts.removeWhere((s) => s.isEmpty);
 
     return splitTexts;
