@@ -83,7 +83,10 @@ class TextHighlight extends StatelessWidget {
   String _multipleBinding() {
     String boundText = text;
 
-    for (String word in words.keys) {
+    List<String> wordList = words.keys.toList();
+    wordList.sort((String w1, String w2) => w2.length.compareTo(w1.length));
+
+    for (String word in wordList) {
       originalWords.addAll({word: <String>[]});
 
       if (matchCase) {
