@@ -82,47 +82,28 @@ class TextHighlight extends StatelessWidget {
 
   String _multipleBinding() {
     String boundText = text;
-    final Map<int, Match> allMatchesByStartIndex = <int, Match>{};
 
-    for (String word in words.keys) {
-      originalWords[word] = <String>[];
+    List<String> wordList = words.keys.toList();
+    wordList.sort((String w1, String w2) => w2.length.compareTo(w1.length));
 
-      Iterable<Match> wordMatches = matchCase
-          ? word.allMatches(text)
-          : word.toLowerCase().allMatches(text.toLowerCase())
-      ;
+    for (String word in wordList) {
+      originalWords.addAll({word: <String>[]});
 
-      for (Match match in wordMatches) {
-        if (match[0] != null) {
-          // If a match with the same start as the current match is already
-          // known, but the current match is longer, replace the known match.
-          // Otherwise do nothing, because otherwise this would
-          // attempt to highlight a subword in an already highlighted word,
-          // which would break the <highlight> syntax.
-          Match? knownMatch = allMatchesByStartIndex[match.start];
-          if (knownMatch == null || match[0]!.length > knownMatch[0]!.length) {
-            originalWords[word]!.add(text.substring(match.start, match.end));
-            allMatchesByStartIndex[match.start] = match;
+      if (matchCase) {
+        boundText = boundText.replaceAll(
+            word, '|${words.keys.toList().indexOf(word)}|');
+      } else {
+        for (int i = 0; i < word.toLowerCase().allMatches(text.toLowerCase()).length; i++) {
+          int strIndex = boundText.toLowerCase().indexOf(word.toLowerCase());
+          if (strIndex >= 0) {
+            originalWords[word]!
+                .add(boundText.substring(strIndex, strIndex + word.length));
+
+            boundText = boundText.replaceRange(strIndex, strIndex + word.length,
+                '|${words.keys.toList().indexOf(word)}|');
           }
         }
       }
-    }
-
-    final List<String> sourceWords = matchCase
-        ? words.keys.toList()
-        : words.keys.map((w) => w.toLowerCase()).toList()
-    ;
-
-    // sort by start descending to replace from right to left
-    final List<Match> allMatches = allMatchesByStartIndex.values.toList();
-    allMatches.sort((m1, m2) => m2.start.compareTo(m1.start));
-
-    for (Match match in allMatches) {
-      boundText = boundText.replaceRange(
-        match.start,
-        match.end,
-        '<highlight>${sourceWords.indexOf(match[0]!)}<highlight>',
-      );
     }
 
     return boundText;
@@ -138,7 +119,7 @@ class TextHighlight extends StatelessWidget {
         int strIndex = boundText.indexOf(word);
         int strLastIndex = strIndex + word.length;
         boundText = boundText.replaceRange(strIndex, strLastIndex,
-            '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
+            '|${words.keys.toList().indexOf(word)}|');
       } else {
         int strIndex = boundText.toLowerCase().indexOf(word.toLowerCase());
         int strLastIndex = strIndex + word.length;
@@ -147,7 +128,7 @@ class TextHighlight extends StatelessWidget {
               .add(boundText.substring(strIndex, strIndex + word.length));
 
           boundText = boundText.replaceRange(strIndex, strLastIndex,
-              '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
+              '|${words.keys.toList().indexOf(word)}|');
         }
       }
     }
@@ -165,7 +146,7 @@ class TextHighlight extends StatelessWidget {
         int strIndex = boundText.lastIndexOf(word);
         int strLastIndex = strIndex + word.length;
         boundText = boundText.replaceRange(strIndex, strLastIndex,
-            '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
+            '|${words.keys.toList().indexOf(word)}|');
       } else {
         int strIndex = boundText.toLowerCase().lastIndexOf(word.toLowerCase());
         int strLastIndex = strIndex + word.length;
@@ -174,7 +155,7 @@ class TextHighlight extends StatelessWidget {
               .add(boundText.substring(strIndex, strIndex + word.length));
 
           boundText = boundText.replaceRange(strIndex, strLastIndex,
-              '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
+              '|${words.keys.toList().indexOf(word)}|');
         }
       }
     }
@@ -197,7 +178,7 @@ class TextHighlight extends StatelessWidget {
         boundWords = _multipleBinding();
     }
 
-    List<String> splitTexts = boundWords.split("<highlight>");
+    List<String> splitTexts = boundWords.split("|");
     splitTexts.removeWhere((s) => s.isEmpty);
 
     return splitTexts;
