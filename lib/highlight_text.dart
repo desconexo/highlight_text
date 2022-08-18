@@ -90,7 +90,7 @@ class TextHighlight extends StatelessWidget {
         boundText = boundText.replaceAll(
             word, '|${words.keys.toList().indexOf(word)}|');
       } else {
-        for (int i = 0; i < word.allMatches(text.toLowerCase()).length; i++) {
+        for (int i = 0; i < word.toLowerCase().allMatches(text.toLowerCase()).length; i++) {
           int strIndex = boundText.toLowerCase().indexOf(word.toLowerCase());
           if (strIndex >= 0) {
             originalWords[word]!
