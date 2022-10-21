@@ -1,3 +1,11 @@
+## 1.5.0
+Fixed number parse issue
+Thanks to [Hakob](https://github.com/Hakob)
+
+Replace `<highlight>` with `|` to avoid issues with words which overlap with the word "highlight"
+Highlight words from longest to shortest, because otherwise the longer word might not get highlighted if the shorter word is a subword of it
+Thanks to [Enloc](https://github.com/enloc-port)
+
 ## 1.4.1
 
 Highlight words without highlighting subwords.
