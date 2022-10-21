@@ -44,6 +44,7 @@ class TextHighlight extends StatelessWidget {
   final StrutStyle? strutStyle;
   final bool matchCase;
   final HighlightBinding binding;
+  final PlaceholderAlignment spanAlignment;
 
   final Map<String, List<String>> originalWords = <String, List<String>>{};
 
@@ -61,6 +62,7 @@ class TextHighlight extends StatelessWidget {
     this.strutStyle,
     this.matchCase = false,
     this.binding = HighlightBinding.all,
+    this.spanAlignment = PlaceholderAlignment.middle,
   });
 
   @override
@@ -119,7 +121,7 @@ class TextHighlight extends StatelessWidget {
       boundText = boundText.replaceRange(
         match.start,
         match.end,
-        '<highlight>${sourceWords.indexOf(match[0]!)}<highlight>',
+        '|${sourceWords.indexOf(match[0]!)}|',
       );
     }
 
@@ -135,8 +137,8 @@ class TextHighlight extends StatelessWidget {
       if (matchCase) {
         int strIndex = boundText.indexOf(word);
         int strLastIndex = strIndex + word.length;
-        boundText = boundText.replaceRange(strIndex, strLastIndex,
-            '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
+        boundText = boundText.replaceRange(
+            strIndex, strLastIndex, '|${words.keys.toList().indexOf(word)}|');
       } else {
         int strIndex = boundText.toLowerCase().indexOf(word.toLowerCase());
         int strLastIndex = strIndex + word.length;
@@ -144,8 +146,8 @@ class TextHighlight extends StatelessWidget {
           originalWords[word]!
               .add(boundText.substring(strIndex, strIndex + word.length));
 
-          boundText = boundText.replaceRange(strIndex, strLastIndex,
-              '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
+          boundText = boundText.replaceRange(
+              strIndex, strLastIndex, '|${words.keys.toList().indexOf(word)}|');
         }
       }
     }
@@ -162,8 +164,8 @@ class TextHighlight extends StatelessWidget {
       if (matchCase) {
         int strIndex = boundText.lastIndexOf(word);
         int strLastIndex = strIndex + word.length;
-        boundText = boundText.replaceRange(strIndex, strLastIndex,
-            '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
+        boundText = boundText.replaceRange(
+            strIndex, strLastIndex, '|${words.keys.toList().indexOf(word)}|');
       } else {
         int strIndex = boundText.toLowerCase().lastIndexOf(word.toLowerCase());
         int strLastIndex = strIndex + word.length;
@@ -171,8 +173,8 @@ class TextHighlight extends StatelessWidget {
           originalWords[word]!
               .add(boundText.substring(strIndex, strIndex + word.length));
 
-          boundText = boundText.replaceRange(strIndex, strLastIndex,
-              '<highlight>${words.keys.toList().indexOf(word)}<highlight>');
+          boundText = boundText.replaceRange(
+              strIndex, strLastIndex, '|${words.keys.toList().indexOf(word)}|');
         }
       }
     }
@@ -195,7 +197,7 @@ class TextHighlight extends StatelessWidget {
         boundWords = _multipleBinding();
     }
 
-    List<String> splitTexts = boundWords.split("<highlight>");
+    List<String> splitTexts = boundWords.split("|");
     splitTexts.removeWhere((s) => s.isEmpty);
 
     return splitTexts;
@@ -223,6 +225,7 @@ class TextHighlight extends StatelessWidget {
         return TextSpan(
           children: [
             WidgetSpan(
+              alignment: spanAlignment,
               child: GestureDetector(
                 onTap: words[currentWord]!.onTap ?? () {},
                 child: Container(
