@@ -1,3 +1,6 @@
+## 1.6.0
+Added `splitOnLongWord`, it will split the words when it is too long, keeping the words in the same line as the text.
+
 ## 1.5.0
 Fixed number parse issue
 Thanks to [Hakob](https://github.com/Hakob)

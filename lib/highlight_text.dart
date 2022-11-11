@@ -2,7 +2,7 @@ library highlight_text;
 
 import 'package:flutter/material.dart';
 
-/// Defines what occurrence you want to highligh
+/// Defines what occurrence you want to highlight
 enum HighlightBinding {
   /// Highlights all occurrences of a word
   all,
@@ -31,8 +31,24 @@ class HighlightedWord {
 
 /// TextHighlight will provide you a easy way to display highlighted words on your app
 class TextHighlight extends StatelessWidget {
+  /// The text you want to show
   final String text;
+
+  /// Map with the word you need to highlight
   final Map<String, HighlightedWord> words;
+
+  /// Split the highlighted word to fit in the same line as the text
+  final bool splitOnLongWord;
+
+  /// Change the alignment of the text inside span
+  final PlaceholderAlignment spanAlignment;
+
+  /// If it is true, it will highlight the exactly same match
+  final bool matchCase;
+
+  /// Change the occurrence of a highlight
+  final HighlightBinding binding;
+
   final TextStyle? textStyle;
   final TextAlign textAlign;
   final TextDirection? textDirection;
@@ -42,11 +58,8 @@ class TextHighlight extends StatelessWidget {
   final int? maxLines;
   final Locale? locale;
   final StrutStyle? strutStyle;
-  final bool matchCase;
-  final HighlightBinding binding;
-  final PlaceholderAlignment spanAlignment;
 
-  final Map<String, List<String>> originalWords = <String, List<String>>{};
+  final Map<String, List<String>> _originalWords = <String, List<String>>{};
 
   TextHighlight({
     required this.text,
@@ -63,6 +76,7 @@ class TextHighlight extends StatelessWidget {
     this.matchCase = false,
     this.binding = HighlightBinding.all,
     this.spanAlignment = PlaceholderAlignment.middle,
+    this.splitOnLongWord = false,
   });
 
   @override
@@ -87,7 +101,7 @@ class TextHighlight extends StatelessWidget {
     final Map<int, Match> allMatchesByStartIndex = <int, Match>{};
 
     for (String word in words.keys) {
-      originalWords[word] = <String>[];
+      _originalWords[word] = <String>[];
 
       Iterable<Match> wordMatches = matchCase
           ? word.allMatches(text)
@@ -102,7 +116,7 @@ class TextHighlight extends StatelessWidget {
           // which would break the <highlight> syntax.
           Match? knownMatch = allMatchesByStartIndex[match.start];
           if (knownMatch == null || match[0]!.length > knownMatch[0]!.length) {
-            originalWords[word]!.add(text.substring(match.start, match.end));
+            _originalWords[word]!.add(text.substring(match.start, match.end));
             allMatchesByStartIndex[match.start] = match;
           }
         }
@@ -132,7 +146,7 @@ class TextHighlight extends StatelessWidget {
     String boundText = text;
 
     for (String word in words.keys) {
-      originalWords.addAll({word: <String>[]});
+      _originalWords.addAll({word: <String>[]});
 
       if (matchCase) {
         int strIndex = boundText.indexOf(word);
@@ -143,7 +157,7 @@ class TextHighlight extends StatelessWidget {
         int strIndex = boundText.toLowerCase().indexOf(word.toLowerCase());
         int strLastIndex = strIndex + word.length;
         if (strIndex >= 0) {
-          originalWords[word]!
+          _originalWords[word]!
               .add(boundText.substring(strIndex, strIndex + word.length));
 
           boundText = boundText.replaceRange(
@@ -159,7 +173,7 @@ class TextHighlight extends StatelessWidget {
     String boundText = text;
 
     for (String word in words.keys) {
-      originalWords.addAll({word: <String>[]});
+      _originalWords.addAll({word: <String>[]});
 
       if (matchCase) {
         int strIndex = boundText.lastIndexOf(word);
@@ -170,7 +184,7 @@ class TextHighlight extends StatelessWidget {
         int strIndex = boundText.toLowerCase().lastIndexOf(word.toLowerCase());
         int strLastIndex = strIndex + word.length;
         if (strIndex >= 0) {
-          originalWords[word]!
+          _originalWords[word]!
               .add(boundText.substring(strIndex, strIndex + word.length));
 
           boundText = boundText.replaceRange(
@@ -211,53 +225,65 @@ class TextHighlight extends StatelessWidget {
 
     int? index = int.tryParse(nextToDisplay);
 
-    if (index != null) {
-      try {
-        String currentWord = words.keys.toList()[index];
-        String showWord;
-        if (matchCase) {
-          showWord = currentWord;
-        } else {
-          showWord = originalWords[currentWord]!.first;
-          originalWords[currentWord]!.removeAt(0);
+    // if (index != null) {
+    try {
+      String currentWord = words.keys.toList()[index!];
+      String showWord;
+      if (matchCase) {
+        showWord = currentWord;
+      } else {
+        showWord = _originalWords[currentWord]!.first;
+        _originalWords[currentWord]!.removeAt(0);
+      }
+      final List<String> splittedWords = [];
+      if (splitOnLongWord && showWord.contains(" ")) {
+        for (String w in showWord.split(" ")) {
+          splittedWords.addAll([w, " "]);
         }
+      } else {
+        splittedWords.add(showWord);
+      }
 
-        return TextSpan(
-          children: [
-            WidgetSpan(
-              alignment: spanAlignment,
-              child: GestureDetector(
-                onTap: words[currentWord]!.onTap ?? () {},
-                child: Container(
-                  padding: words[currentWord]!.padding,
-                  decoration: words[currentWord]!.decoration,
-                  child: Text(
-                    showWord,
-                    style: words[currentWord]!.textStyle ?? textStyle,
+      return TextSpan(
+        children: [
+          for (String w in splittedWords)
+            if (w == " ")
+              _buildSpan([" "])
+            else
+              WidgetSpan(
+                alignment: spanAlignment,
+                child: GestureDetector(
+                  onTap: words[currentWord]!.onTap,
+                  child: Container(
+                    padding: words[currentWord]!.padding,
+                    decoration: words[currentWord]!.decoration,
+                    child: Text(
+                      w,
+                      style: words[currentWord]!.textStyle ?? textStyle,
+                    ),
                   ),
                 ),
               ),
-            ),
-            _buildSpan(boundWords),
-          ],
-        );
-      } catch (e) {
-        return TextSpan(
-          text: nextToDisplay,
-          style: textStyle,
-          children: [
-            _buildSpan(boundWords),
-          ],
-        );
-      }
+          _buildSpan(boundWords),
+        ],
+      );
+    } catch (e) {
+      return TextSpan(
+        text: nextToDisplay,
+        style: textStyle,
+        children: [
+          _buildSpan(boundWords),
+        ],
+      );
     }
+    // }
 
-    return TextSpan(
-      text: nextToDisplay,
-      style: textStyle,
-      children: [
-        _buildSpan(boundWords),
-      ],
-    );
+    // return TextSpan(
+    //   text: nextToDisplay,
+    //   style: textStyle,
+    //   children: [
+    //     _buildSpan(boundWords),
+    //   ],
+    // );
   }
 }
