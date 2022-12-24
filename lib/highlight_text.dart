@@ -260,6 +260,7 @@ class TextHighlight extends StatelessWidget {
                     child: Text(
                       w,
                       style: words[currentWord]!.textStyle ?? textStyle,
+                      textScaleFactor: 1.0,
                     ),
                   ),
                 ),
