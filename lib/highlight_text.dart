@@ -221,73 +221,62 @@ class TextHighlight extends StatelessWidget {
   }
 
   TextSpan _buildSpan(List<String> boundWords) {
-    if (boundWords.isEmpty) return TextSpan();
-
-    String nextToDisplay = boundWords.first;
-    boundWords.removeAt(0);
-
-    int? index = int.tryParse(nextToDisplay);
-
-    if (index != null) {
-      try {
-        String currentWord = words.keys.toList()[index];
-        String showWord;
-        if (matchCase) {
-          showWord = currentWord;
-        } else {
-          showWord = _originalWords[currentWord]!.first;
-          _originalWords[currentWord]!.removeAt(0);
-        }
-        final List<String> splittedWords = [];
-        if (splitOnLongWord && showWord.contains(" ")) {
-          for (String w in showWord.split(" ")) {
-            splittedWords.addAll([w, " "]);
-          }
-        } else {
-          splittedWords.add(showWord);
-        }
-
-        return TextSpan(
-          children: [
-            for (String w in splittedWords)
-              if (w == " ")
-                _buildSpan([" "])
-              else
-                WidgetSpan(
-                  alignment: spanAlignment,
-                  child: GestureDetector(
-                    onTap: words[currentWord]!.onTap,
-                    child: Container(
-                      padding: words[currentWord]!.padding,
-                      decoration: words[currentWord]!.decoration,
-                      child: Text(
-                        w,
-                        style: words[currentWord]!.textStyle ?? textStyle,
-                        textScaleFactor: 1.0,
+    return TextSpan(
+      children: boundWords
+          .map<List<InlineSpan>>((word) {
+            final index = int.tryParse(word);
+            if (index != null) {
+              try {
+                String currentWord = words.keys.toList()[index];
+                String showWord;
+                if (matchCase) {
+                  showWord = currentWord;
+                } else {
+                  showWord = _originalWords[currentWord]!.first;
+                  _originalWords[currentWord]!.removeAt(0);
+                }
+                final List<String> splittedWords = [];
+                if (splitOnLongWord && showWord.contains(" ")) {
+                  for (String w in showWord.split(" ")) {
+                    splittedWords.addAll([w, " "]);
+                  }
+                } else {
+                  splittedWords.add(showWord);
+                }
+                return splittedWords.map((w) {
+                  if (w == ' ') {
+                    return TextSpan(
+                      text: '',
+                      style: textStyle,
+                    );
+                  }
+                  return WidgetSpan(
+                    alignment: spanAlignment,
+                    child: GestureDetector(
+                      onTap: words[currentWord]!.onTap,
+                      child: Container(
+                        padding: words[currentWord]!.padding,
+                        decoration: words[currentWord]!.decoration,
+                        child: Text(
+                          w,
+                          style: words[currentWord]!.textStyle ?? textStyle,
+                          textScaleFactor: 1.0,
+                        ),
                       ),
                     ),
-                  ),
-                ),
-            _buildSpan(boundWords),
-          ],
-        );
-      } catch (e) {
-        return TextSpan(
-          text: nextToDisplay,
-          style: textStyle,
-          children: [
-            _buildSpan(boundWords),
-          ],
-        );
-      }
-    }
-
-    return TextSpan(
-      text: nextToDisplay,
-      style: textStyle,
-      children: [
-        _buildSpan(boundWords),
-      ],
+                  );
+                }).toList();
+              } catch (e) {}
+            }
+            return [
+              TextSpan(
+                text: word,
+                style: textStyle,
+              )
+            ];
+          })
+          .expand((span) => span)
+          .toList(),
     );
   }
 }
