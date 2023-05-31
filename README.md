@@ -54,6 +54,8 @@ TextHighlight(
 ),
 ```
 
+![Package example image](screenshot.png)
+
 ## 1.1.0 Update
 
 Now you can customize better the words you highlight, just like a `Container`.
