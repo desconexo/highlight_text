@@ -93,6 +93,9 @@ class TextHighlight extends StatelessWidget {
       textAlign: textAlign,
       textDirection: textDirection,
       textScaleFactor: textScaleFactor,
+      selectionRegistrar: SelectionContainer.maybeOf(context),
+      selectionColor: Theme.of(context).textSelectionTheme.selectionColor ??
+          const Color(0xAF6694e8),
     );
   }
 
