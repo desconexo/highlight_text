@@ -220,74 +220,73 @@ class TextHighlight extends StatelessWidget {
     return splitTexts;
   }
 
-  TextSpan _buildSpan(List<String> boundWords) {
-    if (boundWords.isEmpty) return TextSpan();
-
-    String nextToDisplay = boundWords.first;
-    boundWords.removeAt(0);
-
-    int? index = int.tryParse(nextToDisplay);
-
-    if (index != null) {
-      try {
-        String currentWord = words.keys.toList()[index];
-        String showWord;
-        if (matchCase) {
-          showWord = currentWord;
-        } else {
-          showWord = _originalWords[currentWord]!.first;
-          _originalWords[currentWord]!.removeAt(0);
-        }
-        final List<String> splittedWords = [];
-        if (splitOnLongWord && showWord.contains(" ")) {
-          for (String w in showWord.split(" ")) {
-            splittedWords.addAll([w, " "]);
-          }
-        } else {
-          splittedWords.add(showWord);
-        }
-
-        return TextSpan(
-          children: [
-            for (String w in splittedWords)
-              if (w == " ")
-                _buildSpan([" "])
-              else
-                WidgetSpan(
-                  alignment: spanAlignment,
-                  child: GestureDetector(
-                    onTap: words[currentWord]!.onTap,
-                    child: Container(
-                      padding: words[currentWord]!.padding,
-                      decoration: words[currentWord]!.decoration,
+  InlineSpan _buildSpan(List<String> boundWords) {
+    return TextSpan(
+      style: textStyle,
+      children: boundWords
+          .map<List<InlineSpan>>((word) {
+            final index = int.tryParse(word);
+            if (index != null) {
+              try {
+                String currentWord = words.keys.toList()[index];
+                String showWord;
+                if (matchCase) {
+                  showWord = currentWord;
+                } else {
+                  showWord = _originalWords[currentWord]!.first;
+                  _originalWords[currentWord]!.removeAt(0);
+                }
+                final List<String> splittedWords = [];
+                if (splitOnLongWord && showWord.contains(" ")) {
+                  for (String w in showWord.split(" ")) {
+                    splittedWords.addAll([w, " "]);
+                  }
+                } else {
+                  splittedWords.add(showWord);
+                }
+                return splittedWords.map((w) {
+                  if (w == ' ') {
+                    return WidgetSpan(
+                      alignment: spanAlignment,
                       child: Text(
-                        w,
-                        style: words[currentWord]!.textStyle ?? textStyle,
+                        ' ',
+                        style: textStyle,
                         textScaleFactor: 1.0,
                       ),
+                    );
+                  }
+                  return WidgetSpan(
+                    alignment: spanAlignment,
+                    child: GestureDetector(
+                      onTap: words[currentWord]!.onTap,
+                      child: Container(
+                        padding: words[currentWord]!.padding,
+                        decoration: words[currentWord]!.decoration,
+                        child: Text(
+                          w,
+                          style: words[currentWord]!.textStyle ?? textStyle,
+                          textScaleFactor: 1.0,
+                        ),
+                      ),
                     ),
-                  ),
+                  );
+                }).toList();
+              } catch (e) {}
+            }
+            return [
+              WidgetSpan(
+                alignment: spanAlignment,
+                child: Text(
+                  word,
+                  style: textStyle,
+                  textScaleFactor: 1.0,
                 ),
-            _buildSpan(boundWords),
-          ],
-        );
-      } catch (e) {
-        return TextSpan(
-          text: nextToDisplay,
-          style: textStyle,
-          children: [
-            _buildSpan(boundWords),
-          ],
-        );
-      }
-    }
-
-    return TextSpan(
-      text: nextToDisplay,
-      style: textStyle,
-      children: [
-        _buildSpan(boundWords),
-      ],
+              ),
+            ];
+          })
+          // flatten the list
+          .expand((span) => span)
+          .toList(),
     );
   }
 }
