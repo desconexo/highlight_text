@@ -1,3 +1,9 @@
+## 1.7.0
+- Added textScaleFactor;
+- Rewritten binding logic;
+
+Thanks to [Crizant](https://github.com/crizant)
+
 ## 1.6.0
 Added `splitOnLongWord`, it will split the words when it is too long, keeping the words in the same line as the text.
 
