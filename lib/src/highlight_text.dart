@@ -16,6 +16,12 @@ enum HighlightBinding {
   last,
 }
 
+typedef HighlightBuilder = TextSpan Function(
+  String fullText,
+  String highlightText,
+  TextStyle? highlightStyle,
+);
+
 /// TextHighlight will provide you a easy way to display highlighted words on your app
 class TextHighlight extends StatelessWidget {
   /// The text you want to show
@@ -46,6 +52,8 @@ class TextHighlight extends StatelessWidget {
   final Locale? locale;
   final StrutStyle? strutStyle;
 
+  final HighlightBuilder? highlightBuilder;
+
   TextHighlight({
     required this.text,
     required this.words,
@@ -62,6 +70,7 @@ class TextHighlight extends StatelessWidget {
     this.binding = HighlightBinding.all,
     this.spanAlignment = PlaceholderAlignment.middle,
     this.splitOnLongWord = false,
+    this.highlightBuilder,
   });
 
   @override
@@ -123,6 +132,16 @@ class TextHighlight extends StatelessWidget {
                       style: textStyle,
                     );
                   }
+
+                  // WidgetSpan vs TextSpan is not same baseline
+                  if (highlightBuilder != null) {
+                    return highlightBuilder!.call(
+                      text,
+                      w,
+                      highlightedWord.textStyle,
+                    );
+                  }
+
                   return WidgetSpan(
                     alignment: spanAlignment,
                     child: InkWell(
