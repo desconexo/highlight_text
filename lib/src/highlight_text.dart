@@ -125,6 +125,7 @@ class TextHighlight extends StatelessWidget {
                   }
                   return WidgetSpan(
                     alignment: spanAlignment,
+                    style: highlightedWord.textStyle ?? textStyle,
                     child: InkWell(
                       onTap: highlightedWord.onTap,
                       child: Container(
