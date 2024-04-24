@@ -22,6 +22,12 @@ typedef HighlightBuilder = TextSpan Function(
   TextStyle? highlightStyle,
 );
 
+typedef WidgetSpanHighlightBuilder = WidgetSpan Function(
+  String fullText,
+  String highlightText,
+  TextStyle? highlightStyle,
+);
+
 /// TextHighlight will provide you a easy way to display highlighted words on your app
 class TextHighlight extends StatelessWidget {
   /// The text you want to show
@@ -53,6 +59,7 @@ class TextHighlight extends StatelessWidget {
   final StrutStyle? strutStyle;
 
   final HighlightBuilder? highlightBuilder;
+  final WidgetSpanHighlightBuilder? widgetSpanHighlightBuilder;
 
   TextHighlight({
     required this.text,
@@ -71,6 +78,7 @@ class TextHighlight extends StatelessWidget {
     this.spanAlignment = PlaceholderAlignment.middle,
     this.splitOnLongWord = false,
     this.highlightBuilder,
+    this.widgetSpanHighlightBuilder,
   });
 
   @override
@@ -130,6 +138,14 @@ class TextHighlight extends StatelessWidget {
                     return TextSpan(
                       text: '',
                       style: textStyle,
+                    );
+                  }
+
+                  if (widgetSpanHighlightBuilder != null) {
+                    return widgetSpanHighlightBuilder!.call(
+                      text,
+                      w,
+                      highlightedWord.textStyle,
                     );
                   }
 
