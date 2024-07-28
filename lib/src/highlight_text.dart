@@ -66,7 +66,7 @@ class TextHighlight extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sortedWords = sortWords(words.entries.toList());
+    final sortedWords = sortAndFilterWords(words.entries.toList());
     final boundWords = _bind(
       sortedWords.map((entry) => entry.key).toList(),
     );
