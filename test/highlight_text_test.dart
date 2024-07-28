@@ -45,11 +45,14 @@ void main() {
   });
 
   test('sortWords', () {
-    final sorted = sortWords({
+    final sorted = sortAndFilterWords({
       'apple': HighlightedWord(),
       'orange': HighlightedWord(),
       'pineapple': HighlightedWord(),
+      '': HighlightedWord(),
+      ' ': HighlightedWord(),
     }.entries.toList());
+    expect(sorted.length, 3);
     expect(
       sorted.map((entry) => entry.key).toList(),
       ['pineapple', 'orange', 'apple'],
