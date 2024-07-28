@@ -1,3 +1,10 @@
+## 1.8.0
+- Get default text scale factor from media query
+- Add highlight builder
+- Prevent performance degradation with empty search queries
+
+Thanks to [Crizant](https://github.com/crizant), [Thientran2910](https://github.com/Thientran2910) and [oriventi](https://github.com/oriventi)
+
 ## 1.7.0
 - Added textScaleFactor;
 - Rewritten binding logic;
