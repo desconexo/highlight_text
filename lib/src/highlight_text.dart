@@ -20,14 +20,14 @@ typedef HighlightBuilder = TextSpan Function(
   String fullText,
   String highlightText,
   TextStyle? highlightStyle,
-  Function? onTap,
+  VoidCallback? onTap,
 );
 
 typedef WidgetSpanHighlightBuilder = WidgetSpan Function(
   String fullText,
   String highlightText,
   TextStyle? highlightStyle,
-  Function? onTap,
+  VoidCallback? onTap,
 );
 
 /// TextHighlight will provide you a easy way to display highlighted words on your app
