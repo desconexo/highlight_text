@@ -20,12 +20,14 @@ typedef HighlightBuilder = TextSpan Function(
   String fullText,
   String highlightText,
   TextStyle? highlightStyle,
+  Function? onTap,
 );
 
 typedef WidgetSpanHighlightBuilder = WidgetSpan Function(
   String fullText,
   String highlightText,
   TextStyle? highlightStyle,
+  Function? onTap,
 );
 
 /// TextHighlight will provide you a easy way to display highlighted words on your app
@@ -146,6 +148,7 @@ class TextHighlight extends StatelessWidget {
                       text,
                       w,
                       highlightedWord.textStyle,
+                      highlightedWord.onTap,
                     );
                   }
 
@@ -155,6 +158,7 @@ class TextHighlight extends StatelessWidget {
                       text,
                       w,
                       highlightedWord.textStyle,
+                      highlightedWord.onTap,
                     );
                   }
 
